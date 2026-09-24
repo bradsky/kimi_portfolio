@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "name": "Kimi Chiang Portfolio — Design Tokens",
+    "description": "Design system tokens extracted from the live site (Studio.design build) via computed-style inspection.",
+    "source_references": ["https://kimichiang.studio.site/"],
+    "created_at": "2026-09-02"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic",
+      "primary": { "hex": "#000000", "role": "primary text / UI foreground, logo, dividers" },
+      "secondary": { "hex": "#333333", "role": "secondary text, default link color" },
+      "accent": { "hex": "#000000", "role": "emphasis only via value contrast — category tag chips and heading underline; no distinct hue accent exists in the chrome" },
+      "neutral": {
+        "scale": ["#FFFFFF", "#666666", "#333333", "#000000"],
+        "usage": "#FFFFFF = page/card background, #666666 = body/description copy, #333333 = link & tertiary text, #000000 = headings, primary text, dividers, tag-chip fill"
+      },
+      "semantic": {
+        "success": "#2E7D32",
+        "warning": "#ED6C02",
+        "error": "#D32F2F",
+        "info": "#0288D1"
+      },
+      "surface": {
+        "background": "#FFFFFF",
+        "card": "#FFFFFF",
+        "elevated": "#FFFFFF"
+      },
+      "contrast_strategy": "Pure black-on-white, high contrast, no midtone surface layers. All color/vibrancy in the page comes from case-study thumbnail images (e.g. Binance yellow, purple gradient), never from UI chrome.",
+      "_notes": "semantic colors are inferred conventions, not observed — this static portfolio has no form/alert states. Everything else above was read directly from computed styles."
+    },
+    "typography": {
+      "type_scale": {
+        "display":     { "size": "50px", "weight": 300, "line_height": "50px",   "tracking": "-2px" },
+        "heading_1":    { "size": "28px", "weight": 900, "line_height": "33.6px", "tracking": "normal" },
+        "heading_2":    { "size": "24px", "weight": 700, "line_height": "28.8px", "tracking": "normal" },
+        "heading_3":    { "size": "20px", "weight": 700, "line_height": "24px",   "tracking": "normal" },
+        "body":         { "size": "16px", "weight": 400, "line_height": "19.2px", "tracking": "normal" },
+        "body_small":   { "size": "14px", "weight": 400, "line_height": "18px",   "tracking": "normal" },
+        "caption":      { "size": "12px", "weight": 400, "line_height": "16px",   "tracking": "normal" },
+        "overline":     { "size": "12px", "weight": 400, "line_height": "16px",   "tracking": "0.5px" }
+      },
+      "font_families": {
+        "heading": "Poppins",
+        "body": "Poppins",
+        "mono": "none used"
+      },
+      "font_style_notes": "Poppins (light 300–400 weight) carries the narrative voice — hero heading, intro paragraph, CTA. Card/project titles break from this using Lato at weight 900 (heavy/black) for punch. heading_2/heading_3/body_small are interpolated — not directly observed on this single-page site, only display (50px/300/-2px), heading_1 (28px Lato 900), body (16px/#666), and caption (12px, white-on-black chip) were measured."
+    },
+    "spacing": {
+      "base_unit": "10px",
+      "scale": ["10px", "20px", "30px", "50px", "100px", "130px"],
+      "content_density": "spacious",
+      "section_rhythm": "Large, deliberate gaps (~100–130px) separate the hero, project list, and contact block — each reads as its own breathing section rather than a continuous flow."
+    },
+    "layout": {
+      "grid_system": "single-column vertical stack; no visible multi-column grid",
+      "max_content_width": "1265px (near full-bleed at a 1280px viewport — roughly 7–8px side inset, not a classic centered container)",
+      "columns": "1 (project cards internally split ~50/50 into image half + text half, alternating)",
+      "gutter": "n/a — no column grid; card image container measured 575px within a 933px card",
+      "breakpoints": "Only desktop (~1280–1440px) appears deliberately tuned. At 375px mobile width, fixed-width text blocks do not reflow and wrap mid-word — a builder limitation rather than an intentional mobile design.",
+      "alignment_tendency": "left-aligned text with a fixed left indent (e.g. 15px on the hero heading); asymmetric image/text pairing per card"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "0px",
+        "medium": "0px",
+        "large": "0px",
+        "pill": "20px (category tag chips only)"
+      },
+      "border_usage": "none — no borders on cards, images, or containers",
+      "divider_style": "solid black block, 50px × 5px, used as an accent rule under the hero heading rather than a hairline"
+    },
+    "elevation": {
+      "shadow_style": "none — fully flat, zero box-shadow anywhere measured",
+      "levels": { "low": "none", "medium": "none", "high": "none" },
+      "depth_cues": "no shadow-based depth; separation comes from scroll-pinned card stacking (cards overlap and reveal one at a time) and from the saturation of case-study images against the stark white ground"
+    },
+    "iconography": {
+      "style": "emoji + text glyph, not a drawn icon set",
+      "stroke_weight": "n/a",
+      "size_scale": "n/a",
+      "preferred_set": "emoji (👋🏻), typographic separators (✦, •), hamburger glyph for the nav toggle — no SVG icon library detected"
+    },
+    "motion": {
+      "easing": "not measurable from static inspection (rendering environment couldn't capture the live scroll animation)",
+      "duration_scale": { "micro": "~150ms (inferred)", "normal": "~400ms (inferred)", "macro": "~800ms (inferred)" },
+      "entrance_pattern": "scroll-triggered reveal — an 'appear' class is toggled per section on scroll (IntersectionObserver-style), with project cards pinned/stacked so each covers the previous as you scroll",
+      "exit_pattern": "not observed",
+      "philosophy": "minimal functional — motion exists only to sequence content reveal, no bounce/elastic/playful easing observed"
+    },
+    "components": {
+      "button_style": "no filled buttons — CTAs are bold, underlined text links (e.g. 'Contact', 'KIMI') in pure black",
+      "input_style": "none observed — no form fields on this page",
+      "card_style": "borderless, shadowless, flat; split into an image half and a text half; revealed one-at-a-time via scroll-pinned stacking rather than a simple vertical list",
+      "navigation_pattern": "fixed top bar: small-caps tracked-out wordmark logo (top-left) + single hamburger icon (top-right); no inline nav links visible by default",
+      "modal_style": "not tested (hamburger menu overlay not opened during this analysis)",
+      "list_style": "vertical stack of project cards, each tagged with a small black pill chip (e.g. 'UI/UX') in the corner",
+      "component_notes": "Tag chip: black pill, 20px radius, 10px padding, 12px white text. Title/body pairing deliberately contrasts a heavy display face (Lato 900) against light narrative Poppins — a weight-contrast strategy rather than a color- or size-contrast one."
+    }
+  }
+}
