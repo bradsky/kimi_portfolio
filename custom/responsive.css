@@ -1,0 +1,162 @@
+/* Responsive fixes on top of the Studio export. Desktop (>1280px) is untouched,
+   except the bullet markup in case-page meta blocks (see responsive.js). */
+
+/* Case-page meta lists (Goal / Role / Challenge): one item per line, hanging indent */
+.kc-case .kc-meta-list {
+  display: block;
+}
+.kc-case .kc-li {
+  display: block;
+}
+.kc-case .kc-li--marked {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.4em;
+}
+.kc-case .kc-empty {
+  display: none;
+}
+/* Studio transitions every .box property; these classes arrive after first paint,
+   so without this the new spacing animates in instead of applying */
+.kc-case .kc-case-meta,
+.kc-case .kc-case-meta *,
+.kc-case .kc-case-body,
+.kc-case .kc-case-body > div,
+.kc-case .kc-case-body h2,
+.kc-case .kc-case-body h3 {
+  transition: none;
+}
+
+/* Case-page cover image fills the whole hero height (Studio used 100% width / auto height,
+   which leaves grey bands above and below — large on phones, ~16px even at 1440px) */
+.kc-case .image:not(main .image) > .image__bg-container::before {
+  background-size: cover;
+}
+
+/* Tablet and below: project list gets the same side margins as the hero above it */
+@media (max-width: 1280px) {
+  .kc-home .list-1 {
+    max-width: calc(100% - 120px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 840px) {
+  /* ---- Home ---- */
+  .kc-home .sd-8 .sd-12 {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .kc-home .list-1 {
+    max-width: calc(100% - 60px);
+  }
+  .kc-home .list-1__item {
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch;
+  }
+  .kc-home .list-1__item__sd-1 {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: var(--kc-ratio, 2 / 1);
+  }
+  .kc-home .list-1__item__sd-2 {
+    width: 100%;
+    max-width: 100%;
+    align-items: flex-start;
+  }
+
+  /* ---- Case pages: every section shares the intro's 30px inset ---- */
+  .kc-case .kc-case-meta {
+    flex-direction: column;
+    padding: 0 30px;
+  }
+  .kc-case .kc-case-meta:not(.kc-case-meta ~ .kc-case-meta) {
+    padding-top: 40px;
+  }
+  .kc-case .kc-case-meta--last {
+    padding-bottom: 12px;
+  }
+  .kc-case .kc-case-meta div {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .kc-case .kc-case-meta .kc-meta-group {
+    margin-bottom: 28px;
+  }
+  .kc-case .kc-meta-label {
+    margin-bottom: 8px;
+  }
+  .kc-case .kc-li + .kc-li {
+    margin-top: 6px;
+  }
+
+  .kc-case .kc-case-body {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
+  .kc-case .kc-case-body > div {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Studio's 1.7 line-height reads loose once headings wrap to 2–3 lines */
+  .kc-case .kc-case-body h2,
+  .kc-case .kc-case-body h3 {
+    line-height: 1.25;
+  }
+
+  /* ---- About ---- */
+  /* photo block had a fixed height (~140px empty below the photo) plus a 48px margin */
+  .kc-about .sd-14 {
+    height: auto;
+    margin-bottom: 0;
+  }
+  /* Studio drew the portrait at 60% width, top-aligned in a taller box (87px empty below it).
+     Size the box to the photo's own 374×512 ratio at 80% width so the photo fills it exactly. */
+  .kc-about .sd-14 .image {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 374 / 512;
+    align-self: center;
+  }
+  .kc-about .sd-14 .image__bg-container::before {
+    background-size: cover;
+  }
+  /* the icons below carry ~21px of their own top whitespace, so 43px here reads as 64px */
+  .kc-about .sd-4 {
+    margin-bottom: 43px;
+  }
+  /* email / CV / LinkedIn: desktop is a bordered 3-cell row; stacked on phones the
+     cells shrink to different widths and the borders break up, so drop them and space the items */
+  .kc-about .sd-16 {
+    gap: 40px;
+  }
+  .kc-about .sd-17,
+  .kc-about .sd-20,
+  .kc-about .sd-23 {
+    border: 0;
+  }
+}
+
+/* Phones: keep "This is KIMI" on one line by scaling the greeting with the viewport */
+@media (max-width: 540px) {
+  .kc-home .sd-8 .sd-11,
+  .kc-home .sd-8 .sd-13,
+  .kc-home .sd-8 .sd-14,
+  .kc-home .sd-8 .kc-suffix {
+    font-size: min(60px, 15vw);
+  }
+  /* full-width kana run ~1.6× wider than Latin; scale "こんにちは" so it stays on one line */
+  .kc-home .sd-8 .kc-ja .sd-11 {
+    font-size: min(48px, 12vw);
+  }
+}

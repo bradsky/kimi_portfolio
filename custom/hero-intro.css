@@ -1,0 +1,71 @@
+/* Home hero: waving hand + bilingual typewriter greeting (see hero-intro.js) */
+
+/* Latin glyphs stay Poppins; Japanese falls through to Noto Sans JP at matching weights */
+.sd-8 .sd-11,
+.sd-8 .sd-13,
+.sd-8 .sd-14,
+.sd-8 .kc-suffix {
+  font-family: "Poppins", "Noto Sans JP", sans-serif;
+}
+.sd-8 .kc-ja .kc-seg:not(.kc-name) {
+  letter-spacing: 0.02em;
+}
+.sd-8 .kc-suffix {
+  margin: 0;
+}
+.kc-name-row {
+  display: flex;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+
+.kc-wave {
+  display: inline-block;
+  margin-right: 0.28em; /* the line is a flex row, so a plain space text node would collapse */
+  transform-origin: 70% 75%;
+  animation: kc-wave 2.6s ease-in-out infinite;
+}
+@keyframes kc-wave {
+  0%   { transform: rotate(0deg); }
+  8%   { transform: rotate(16deg); }
+  16%  { transform: rotate(-8deg); }
+  24%  { transform: rotate(16deg); }
+  32%  { transform: rotate(-4deg); }
+  40%  { transform: rotate(10deg); }
+  50%, 100% { transform: rotate(0deg); }
+}
+
+.kc-caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.85em;
+  margin-left: 0.06em;
+  vertical-align: -0.05em;
+  background: currentColor;
+  animation: kc-blink 1s steps(1) infinite;
+}
+.kc-typing .kc-caret {
+  animation: none;
+}
+@keyframes kc-blink {
+  50% { opacity: 0; }
+}
+
+.kc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.kc-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-wave { animation: none; }
+}
